@@ -23,30 +23,36 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [adminName, setAdminName] = useState('')
   const [adminRole, setAdminRole] = useState<'admin' | 'super-admin'>('admin')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [authorized, setAuthorized] = useState(false)
 
   useEffect(() => {
     if (pathname === '/admin/login') return
     const token = localStorage.getItem('kas_warga_token')
-    if (!token) {
+    const adminRaw = token && localStorage.getItem('kas_warga_admin')
+    try {
+      if (!token || !adminRaw) throw new Error('unauthorized')
+      const parsed = JSON.parse(adminRaw)
+      if (!parsed?.name) throw new Error('invalid')
+      setAdminName(parsed.name)
+      setAdminRole(parsed?.role === 'super-admin' || parsed?.role === 'superadmin' ? 'super-admin' : 'admin')
+      setAuthorized(true)
+    } catch {
+      localStorage.removeItem('kas_warga_token')
+      localStorage.removeItem('kas_warga_admin')
       router.replace('/admin/login')
-      return
-    }
-    const adminRaw = localStorage.getItem('kas_warga_admin')
-    if (adminRaw) {
-      try {
-        const parsed = JSON.parse(adminRaw)
-        if (!parsed?.name) throw new Error('invalid')
-        setAdminName(parsed.name)
-        setAdminRole(parsed?.role === 'super-admin' || parsed?.role === 'superadmin' ? 'super-admin' : 'admin')
-      } catch {
-        localStorage.removeItem('kas_warga_token')
-        localStorage.removeItem('kas_warga_admin')
-        router.replace('/admin/login')
-      }
     }
   }, [pathname, router])
 
   if (pathname === '/admin/login') return <>{children}</>
+
+  // Gate: jangan render dashboard sebelum auth terverifikasi (hindari flash sebelum redirect)
+  if (!authorized) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin" />
+      </div>
+    )
+  }
 
   function logout() {
     localStorage.removeItem('kas_warga_token')
