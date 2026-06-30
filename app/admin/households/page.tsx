@@ -144,21 +144,21 @@ export default function AdminHouseholdsPage() {
       </div>
 
       {/* Summary */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 mb-4">
-        <div className="card text-center">
-          <Users size={20} className="text-brand-600 mx-auto mb-1" />
-          <p className="text-xl sm:text-2xl font-bold">{activeCount}</p>
-          <p className="text-xs text-gray-500">KK Aktif</p>
+      <div className="grid grid-cols-3 gap-2.5 sm:gap-3 mb-4">
+        <div className="card text-center p-3 sm:p-5">
+          <Users size={18} className="text-brand-600 mx-auto mb-1" />
+          <p className="text-lg sm:text-2xl font-bold">{activeCount}</p>
+          <p className="text-[11px] sm:text-xs text-gray-500">KK Aktif</p>
         </div>
-        <div className="card text-center">
-          <Users size={20} className="text-gray-400 mx-auto mb-1" />
-          <p className="text-xl sm:text-2xl font-bold">{households.length - activeCount}</p>
-          <p className="text-xs text-gray-500">Tidak Aktif</p>
+        <div className="card text-center p-3 sm:p-5">
+          <Users size={18} className="text-gray-400 mx-auto mb-1" />
+          <p className="text-lg sm:text-2xl font-bold">{households.length - activeCount}</p>
+          <p className="text-[11px] sm:text-xs text-gray-500">Tidak Aktif</p>
         </div>
-        <div className="card text-center">
-          <Users size={20} className="text-blue-600 mx-auto mb-1" />
-          <p className="text-xl sm:text-2xl font-bold">{households.length}</p>
-          <p className="text-xs text-gray-500">Total KK</p>
+        <div className="card text-center p-3 sm:p-5">
+          <Users size={18} className="text-blue-600 mx-auto mb-1" />
+          <p className="text-lg sm:text-2xl font-bold">{households.length}</p>
+          <p className="text-[11px] sm:text-xs text-gray-500">Total KK</p>
         </div>
       </div>
 

@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { toast } from '@/lib/toast'
 import {
   Plus, TrendingUp, TrendingDown, Loader2, Trash2,
-  RefreshCw, Download
+  RefreshCw, Download, Wallet
 } from 'lucide-react'
 import {
   transactionApi,
@@ -158,24 +158,27 @@ export default function AdminTransactionsPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 mb-5">
-        <div className="card text-center">
+      <div className="grid grid-cols-3 gap-2.5 sm:gap-3 mb-5">
+        <div className="card text-center p-3 sm:p-5">
           <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
             <TrendingUp size={16} className="text-green-600" />
           </div>
-          <p className="text-xs text-gray-500 mb-0.5">Pemasukan</p>
-          <p className="font-bold text-xs sm:text-sm break-words">{formatRupiah(summary.incomeTotal)}</p>
+          <p className="text-[11px] sm:text-xs text-gray-500 mb-0.5">Pemasukan</p>
+          <p className="font-bold text-[11px] sm:text-sm break-words leading-tight">{formatRupiah(summary.incomeTotal)}</p>
         </div>
-        <div className="card text-center">
+        <div className="card text-center p-3 sm:p-5">
           <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
             <TrendingDown size={16} className="text-red-600" />
           </div>
-          <p className="text-xs text-gray-500 mb-0.5">Pengeluaran</p>
-          <p className="font-bold text-xs sm:text-sm break-words">{formatRupiah(summary.expenseTotal)}</p>
+          <p className="text-[11px] sm:text-xs text-gray-500 mb-0.5">Pengeluaran</p>
+          <p className="font-bold text-[11px] sm:text-sm break-words leading-tight">{formatRupiah(summary.expenseTotal)}</p>
         </div>
-        <div className={`card text-center ${summary.net >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
-          <p className="text-xs text-gray-500 mb-0.5 mt-5">Saldo</p>
-          <p className={`font-bold text-xs sm:text-sm break-words ${summary.net >= 0 ? 'text-green-700' : 'text-red-700'}`}>
+        <div className={`card text-center p-3 sm:p-5 ${summary.net >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-2 ${summary.net >= 0 ? 'bg-green-100' : 'bg-red-100'}`}>
+            <Wallet size={16} className={summary.net >= 0 ? 'text-green-600' : 'text-red-600'} />
+          </div>
+          <p className="text-[11px] sm:text-xs text-gray-500 mb-0.5">Saldo</p>
+          <p className={`font-bold text-[11px] sm:text-sm break-words leading-tight ${summary.net >= 0 ? 'text-green-700' : 'text-red-700'}`}>
             {formatRupiah(Math.abs(summary.net))}
           </p>
         </div>

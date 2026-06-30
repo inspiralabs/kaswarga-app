@@ -173,30 +173,30 @@ export default function AdminDashboardPage() {
         {/* Quick Actions - Export */}
         <div className="card">
           <h2 className="section-title mb-4">Export Data</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
             <button
               onClick={() => exportApi.payments({ month: currentMonth, year: currentYear }).catch(() => toast.error('Gagal export'))}
-              className="btn-secondary justify-center flex-col py-4 gap-1.5 h-auto"
+              className="btn-secondary justify-start sm:justify-center sm:flex-col py-3 sm:py-4 gap-2.5 sm:gap-1.5 h-auto"
             >
-              <FileSpreadsheet size={20} className="text-green-600" />
+              <FileSpreadsheet size={20} className="text-green-600 flex-shrink-0" />
               <span className="text-sm font-medium">Rekap IPL Bulan Ini</span>
-              <span className="text-xs text-gray-400">.xlsx</span>
+              <span className="text-xs text-gray-400 ml-auto sm:ml-0">.xlsx</span>
             </button>
             <button
               onClick={() => exportApi.payments({ year: currentYear }).catch(() => toast.error('Gagal export'))}
-              className="btn-secondary justify-center flex-col py-4 gap-1.5 h-auto"
+              className="btn-secondary justify-start sm:justify-center sm:flex-col py-3 sm:py-4 gap-2.5 sm:gap-1.5 h-auto"
             >
-              <FileSpreadsheet size={20} className="text-blue-600" />
+              <FileSpreadsheet size={20} className="text-blue-600 flex-shrink-0" />
               <span className="text-sm font-medium">Rekap IPL Tahunan</span>
-              <span className="text-xs text-gray-400">.xlsx</span>
+              <span className="text-xs text-gray-400 ml-auto sm:ml-0">.xlsx</span>
             </button>
             <button
               onClick={() => exportApi.transactions(currentYear).catch(() => toast.error('Gagal export'))}
-              className="btn-secondary justify-center flex-col py-4 gap-1.5 h-auto"
+              className="btn-secondary justify-start sm:justify-center sm:flex-col py-3 sm:py-4 gap-2.5 sm:gap-1.5 h-auto"
             >
-              <FileSpreadsheet size={20} className="text-purple-600" />
+              <FileSpreadsheet size={20} className="text-purple-600 flex-shrink-0" />
               <span className="text-sm font-medium">Laporan Keuangan</span>
-              <span className="text-xs text-gray-400">.xlsx</span>
+              <span className="text-xs text-gray-400 ml-auto sm:ml-0">.xlsx</span>
             </button>
           </div>
         </div>
